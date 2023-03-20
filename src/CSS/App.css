@@ -68,6 +68,7 @@ a:hover {
   justify-content: center;
   gap: 20px;
   padding: 20px;
+  padding-top: 50px;
 }
 
 .card {
@@ -78,11 +79,14 @@ a:hover {
   background-color: rgb(60, 62, 68);
   border-radius: 20px;
   margin-bottom: 20px;
-  transition: 1s;
+  transition: 0.8s;
+
+
 }
 .card:hover{
-  width: 5%;
-  transition: 1s;
+  box-shadow: 10px 8px 2px 0px #00000031;
+  width: 21%;
+  transition: 0.8s;
 }
 
 .char {
@@ -116,6 +120,7 @@ a:hover {
   justify-content: center;
   padding: 10px;
   background-color: rgb(97, 98, 100);
+  flex-direction: wrap;
 }
 
 li {

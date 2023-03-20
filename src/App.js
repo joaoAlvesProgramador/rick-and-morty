@@ -275,12 +275,20 @@ const mock = [{
 function App() {
   const [conteudo, setConteudo ] = useState(<>oi</>)
 
-  function carregarTodosOsPersonagens(){
-    return mock
+  async function carregarTodosOsPersonagens(){
+
+    const retorno = await fetch(
+      "https://rickandmortyapi.com/api/character",
+      {method:"GET"}
+    )
+    
+    .then((reponse) => reponse.json())
+    
+    return retorno.results
   }
 
-  function listaPersonagem(){
-    const todosPersonagens = carregarTodosOsPersonagens()
+  async function listaPersonagem(){
+    const todosPersonagens = await carregarTodosOsPersonagens()
     
     return todosPersonagens.map(personagem => 
       <div className='card char'>
@@ -288,15 +296,18 @@ function App() {
         <h2>{personagem.name}</h2>
         <p>Especies: {personagem.species}</p>
         <p>Genero: {personagem.species}</p>
-        <p className='lista-secundaria'>Participaçoes: {personagem.episode}</p>
+        <p className='lista-secundaria'>Participaçoes: {personagem.episode.map(ep => (<>b</>))}</p>
         <p>Status: {personagem.status}</p>
       </div>
     )
   }
 
   useEffect(() => {
-    setConteudo(listaPersonagem)
-  })
+    async function carregar(){
+      setConteudo(await listaPersonagem())
+    }
+    carregar()
+  },[])
 
   return (
     <div className="App">
