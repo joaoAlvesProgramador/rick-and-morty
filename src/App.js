@@ -275,6 +275,54 @@ const mock = [{
 function App() {
   const [conteudo, setConteudo ] = useState(<>oi</>)
 
+  function translateStatus(status) {
+    switch (status) {
+      case "Alive":
+        return "Vivo"
+
+      case "unknown":
+        return "Desconhecido"
+      
+      case "Dead":
+        return "Morto"
+
+      default:
+        return status
+    }
+  }
+  function translateGenero(gender){
+    switch (gender) {
+      case "Human":
+        return "Humano"
+
+      case "Alien":
+        return "Alienígena"
+
+        case "Robot":
+          return "Robo"
+
+      default:
+        return gender
+
+    }
+  }
+  function translateEspecies(species){
+    switch (species) {
+      case "Human":
+        return "Humano"
+
+      case "Alien":
+        return "Alienígena"
+
+      case "Robot":
+        return "Robo"
+
+      default:
+        return species
+
+    }
+  }
+
   async function carregarTodosOsPersonagens(){
 
     const retorno = await fetch(
@@ -287,17 +335,30 @@ function App() {
     return retorno.results
   }
 
+  function teste() {
+    alert('Você clicou no Personagem')
+  }
+
   async function listaPersonagem(){
     const todosPersonagens = await carregarTodosOsPersonagens()
     
     return todosPersonagens.map(personagem => 
-      <div className='card char'>
+      <div className='card char' onClick={teste}>
         <img src={personagem.image} alt={personagem.name} />
         <h2>{personagem.name}</h2>
-        <p>Especies: {personagem.species}</p>
-        <p>Genero: {personagem.species}</p>
-        <p className='lista-secundaria'>Participaçoes: {personagem.episode.map(ep => (<>b</>))}</p>
-        <p>Status: {personagem.status}</p>
+        <p>Especies: {translateEspecies(personagem.species)}</p>
+        <p>Genero: {translateGenero(personagem.species)}</p>
+
+        <b className='lista-secundaria'>Participaçoes: 
+        {personagem.episode.map(ep => (
+        <span key={personagem.name+(ep.split('episode/')[1])}>
+          
+          Ep-{(ep.split('episode/')[1])}
+        </span>
+        ))}
+        </b>
+
+        <p>Status: {translateStatus(personagem.status)}</p>
       </div>
     )
   }
