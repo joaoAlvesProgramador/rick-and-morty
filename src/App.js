@@ -275,6 +275,9 @@ const mock = [{
 function App() {
   const [conteudo, setConteudo ] = useState(<>oi</>)
 
+  //busca
+  const [busca, setBusca ] = useState('');
+
   function translateStatus(status) {
     switch (status) {
       case "Alive":
@@ -324,15 +327,23 @@ function App() {
   }
 
   async function carregarTodosOsPersonagens(){
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
 
-    const retorno = await fetch(
-      "https://rickandmortyapi.com/api/character",
-      {method:"GET"}
+    const result = await fetch(
+      "https://rickandmortyapi.com/api/character"+busca,
+      requestOptions
     )
     
-    .then((reponse) => reponse.json())
+    .then(response => response.text())
+    .then(result => {return result})
+    .catch(error => console.log('error', error))
+
+    const char = JSON.parse(result)
     
-    return retorno.results
+    return char.results
   }
 
   function teste() {
@@ -368,7 +379,7 @@ function App() {
       setConteudo(await listaPersonagem())
     }
     carregar()
-  },[])
+  },[busca])
 
   return (
     <div className="App">
@@ -377,6 +388,26 @@ function App() {
         <h1>Rick and Morty API</h1>
 
       </header>
+
+      <div className='filtros'>
+        <span className='filtros-titulo'>Filtros</span>
+        <div className='filtro status'>
+          <b>Status:</b>
+          <span onClick={() => setBusca('?status=live')}>Vivo</span>
+          <span onClick={() => setBusca('?status=dead')}>Morto</span>
+          <span onClick={() => setBusca('?status=unknown')}>Desconhecido</span>
+        </div>
+      </div>
+      <div className='filtros'>
+        <div className='filtro status'>
+          <b>Generos:</b>
+          <span onClick={() => setBusca('?gender=male')}>Masculino</span>
+          <span onClick={() => setBusca('?gender=female')}>Feminino</span>
+          <span onClick={() => setBusca('?gender=less')}>Sem genero</span>
+          <span onClick={() => setBusca('?gender=unknown')}>Desconhecimento</span>
+        </div>
+      </div>
+
       <div className='lista-principal'>
         { conteudo }
       </div>

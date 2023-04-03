@@ -47,6 +47,7 @@ a:hover {
 .filtro span:hover {
   text-decoration: none;
   color: #4288ce;
+  cursor: pointer;
 }
 
 .filtro-ativo{
