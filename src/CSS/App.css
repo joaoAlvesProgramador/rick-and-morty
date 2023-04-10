@@ -8,6 +8,8 @@
   background-color: rgb(39, 43, 51);
 }
 
+
+
 h2 {
   padding-top: 20px;
 }
@@ -34,6 +36,7 @@ a:hover {
   padding: 5px;
   border-radius: 25px;
   background-color: rgb(39, 43, 51);
+  transition-delay: 1.8s;
 }
 
 .genero, .status {
@@ -45,9 +48,12 @@ a:hover {
 }
 
 .filtro span:hover {
-  text-decoration: none;
-  color: #4288ce;
+  /* text-decoration: none; */
   cursor: pointer;
+  background-color: black;
+  color: floralwhite;
+  height: 30%;
+  transition: 1.8s;
 }
 
 .filtro-ativo{
@@ -141,6 +147,37 @@ h5 {
   padding: 15px;
 }
 
-h1, h2, h4, h5 {
+ h2, h4, h5 {
 	margin: 0;
+}
+
+h1{
+  margin: 0;
+  position: relative;
+  animation: example 7s infinite;
+}
+
+@keyframes example {
+  0%   {
+    color:aqua;
+    left: 0px;
+    top: 0px;
+  }
+  10%  {color:rgb(0, 135, 212); left: 20px;
+    top: 10px;}
+  20%  {color:rgb(0, 89, 255);left: 0px;
+    top: 10px;}
+  30%  {color:rgb(0, 26, 255);left: -20px;
+    top: 10px;}
+  40% {color:rgb(89, 0, 255);left: -20px;
+    top: 0px;}
+  50%   {color:rgb(132, 0, 255);left: -20px;
+    top: -10px;}
+  60%  {color:rgb(204, 0, 255);left: 0px;
+    top: -10px;}
+  70%  {color:rgb(234, 0, 255);left: 20px;
+    top: -10px;}
+  80%  {color:rgb(255, 0, 212);left: 20px;
+    top: 0px;}
+  100% {color:aqua;}
 }

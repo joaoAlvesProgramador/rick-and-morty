@@ -404,7 +404,7 @@ function App() {
           <span onClick={() => setBusca('?gender=male')}>Masculino</span>
           <span onClick={() => setBusca('?gender=female')}>Feminino</span>
           <span onClick={() => setBusca('?gender=less')}>Sem genero</span>
-          <span onClick={() => setBusca('?gender=unknown')}>Desconhecimento</span>
+          <span onClick={() => setBusca('?gender=unknown')}>Desconhecido</span>
         </div>
       </div>
 
